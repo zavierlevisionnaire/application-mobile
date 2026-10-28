@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "ÉCHO DU NORD TV",
+  "short_name": "ÉCHO DU NORD",
+  "description": "L’information qui résonne au-delà des frontières.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#087a37",
+  "icons": [
+    {
+      "src": "assets/logo-echo-du-nord.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

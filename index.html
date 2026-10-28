@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087a37">
+  <meta name="description" content="ÉCHO DU NORD TV — L’information qui résonne au-delà des frontières.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/logo-echo-du-nord.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>ÉCHO DU NORD TV — Média en ligne</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Accueil ÉCHO DU NORD TV">
+      <img src="assets/logo-echo-du-nord.png" alt="Logo ÉCHO DU NORD TV">
+    </a>
+    <button id="installBtn" class="outline hidden" type="button">Installer l’application</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">MÉDIA EN LIGNE</p>
+        <h1>L’actualité, au plus près de vous.</h1>
+        <p>Le Gabon, le Haut-Ntem et le monde en un seul endroit.</p>
+        <a class="primary" href="#actualites">Lire les actualités</a>
+      </div>
+      <div class="hero-mark" aria-hidden="true">▶</div>
+    </section>
+
+    <section class="ticker" aria-label="Information">
+      <span class="ticker-label">À LA UNE</span>
+      <span>Bienvenue sur ÉCHO DU NORD TV — votre média en ligne.</span>
+    </section>
+
+    <section id="actualites" class="news-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LE FIL DE L’INFORMATION</p>
+          <h2>Dernières actualités</h2>
+        </div>
+        <input id="searchInput" class="search" type="search" placeholder="Rechercher une actualité…" aria-label="Rechercher une actualité">
+      </div>
+      <nav id="categories" class="categories" aria-label="Rubriques">
+        <button class="category active" data-category="Toutes">Toutes</button>
+        <button class="category" data-category="Gabon">Gabon</button>
+        <button class="category" data-category="Haut-Ntem">Haut-Ntem</button>
+        <button class="category" data-category="Politique">Politique</button>
+        <button class="category" data-category="Société">Société</button>
+        <button class="category" data-category="Sport">Sport</button>
+        <button class="category" data-category="Culture">Culture</button>
+        <button class="category" data-category="International">International</button>
+      </nav>
+      <div id="status" class="status">Chargement des actualités…</div>
+      <div id="newsGrid" class="news-grid"></div>
+    </section>
+
+    <section class="newsletter">
+      <div>
+        <p class="eyebrow">RESTONS CONNECTÉS</p>
+        <h2>L’information qui résonne au-delà des frontières.</h2>
+        <p>Retrouvez les actualités et partagez-les autour de vous.</p>
+      </div>
+      <button id="shareBtn" class="primary" type="button">Partager le média</button>
+    </section>
+
+    <section id="admin" class="admin-section">
+      <details>
+        <summary>Espace rédaction / administration</summary>
+        <div class="admin-panel">
+          <p class="muted">Connectez-vous avec le compte rédaction créé dans Supabase. N’activez pas l’inscription publique.</p>
+          <form id="loginForm" class="admin-form">
+            <label>Adresse e-mail
+              <input id="email" type="email" autocomplete="username" required placeholder="redaction@votredomaine.ga">
+            </label>
+            <label>Mot de passe
+              <input id="password" type="password" autocomplete="current-password" required placeholder="Mot de passe">
+            </label>
+            <button class="primary" type="submit">Se connecter</button>
+          </form>
+          <p id="adminStatus" class="status" role="status"></p>
+          <div id="editor" class="hidden">
+            <div class="editor-top">
+              <h3>Publier une actualité</h3>
+              <button id="logoutBtn" class="outline" type="button">Se déconnecter</button>
+            </div>
+            <form id="articleForm" class="admin-form">
+              <label>Titre
+                <input id="articleTitle" required maxlength="180" placeholder="Titre de l’article">
+              </label>
+              <label>Rubrique
+                <select id="articleCategory">
+                  <option>Gabon</option><option>Haut-Ntem</option><option>Politique</option>
+                  <option>Société</option><option>Sport</option><option>Culture</option><option>International</option>
+                </select>
+              </label>
+              <label>Résumé
+                <textarea id="articleSummary" rows="3" maxlength="350" required placeholder="Résumé court visible sur la page d’accueil"></textarea>
+              </label>
+              <label>Contenu complet
+                <textarea id="articleBody" rows="7" required placeholder="Texte de l’article"></textarea>
+              </label>
+              <label>URL de la photo (facultatif)
+                <input id="articleImage" type="url" placeholder="https://…">
+              </label>
+              <label class="checkbox-label"><input id="articlePublished" type="checkbox" checked> Publier immédiatement</label>
+              <button class="primary" type="submit">Enregistrer l’article</button>
+            </form>
+            <h3>Articles récents de la rédaction</h3>
+            <div id="adminArticles" class="admin-articles"></div>
+          </div>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <img src="assets/logo-echo-du-nord.png" alt="" class="footer-logo">
+    <p><strong>ÉCHO DU NORD TV</strong> · Média en ligne</p>
+    <p class="muted">L’information qui résonne au-delà des frontières.</p>
+    <p class="copyright">© <span id="year"></span> ÉCHO DU NORD TV</p>
+  </footer>
+
+  <dialog id="articleDialog">
+    <button id="closeDialog" class="dialog-close" aria-label="Fermer">×</button>
+    <div id="articleDetail"></div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(console.warn));
+    }
+  </script>
+</body>
+</html>
