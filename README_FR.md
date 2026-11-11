@@ -1,6 +1,6 @@
 # ÉCHO DU NORD TV — Kit de démarrage
 
-Cette version est une première application web progressive (PWA) : elle s’adapte au mobile, peut être ajoutée à l’écran d’accueil Android et peut être hébergée sur un service statique gratuit. Le direct TV n’est pas encore inclus.
+Cette version est une première application web progressive (PWA) d’ÉCHO DU NORD TV, média provincial couvrant l’ensemble des départements du Woleu-Ntem, ainsi que le Gabon et l’actualité internationale. Elle s’adapte au mobile et peut être ajoutée à l’écran d’accueil Android. Le direct TV n’est pas encore inclus.
 
 ## 1. Aperçu
 Ouvrir `index.html` dans un navigateur permet de voir une maquette avec des exemples. Pour utiliser les fonctions de rédaction et synchroniser les articles entre plusieurs appareils, il faut configurer Supabase et héberger le site en HTTPS.
