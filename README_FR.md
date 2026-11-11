@@ -3,7 +3,7 @@
 Cette version est une première application web progressive (PWA) d’ÉCHO DU NORD TV, média provincial couvrant l’ensemble des départements du Woleu-Ntem, ainsi que le Gabon et l’actualité internationale. Elle s’adapte au mobile et peut être ajoutée à l’écran d’accueil Android. Le direct TV n’est pas encore inclus.
 
 ## 1. Aperçu
-Ouvrir `index.html` dans un navigateur permet de voir une maquette avec des exemples. Pour utiliser les fonctions de rédaction et synchroniser les articles entre plusieurs appareils, il faut configurer Supabase et héberger le site en HTTPS.
+Ouvrir `index.html` dans un navigateur permet de voir une maquette avec des exemples. Les fonctions de rédaction sont reliées au projet Supabase existant. Les articles sont lus et publiés dans la table `echo_articles` ; les comptes autorisés sont contrôlés via `echo_admins`.
 
 ## 2. Configurer la base de données (offre gratuite disponible)
 1. Créer un projet sur https://supabase.com/.
@@ -16,7 +16,7 @@ Ouvrir `index.html` dans un navigateur permet de voir une maquette avec des exem
 6. Dans **Authentication > Providers / Sign In**, laisser l’authentification par e-mail activée et désactiver les inscriptions publiques si cette option est disponible.
 7. Dans **Authentication > Users**, créer/inviter le compte de la rédaction. Ne pas publier les identifiants dans un document public.
 
-Les politiques SQL fournies limitent chaque compte à ses propres articles pour les opérations de rédaction. Pour plusieurs rédacteurs qui doivent modifier les articles des autres, il faudra ajouter un système de rôles adapté avant la mise en production.
+Les règles RLS du projet vérifient l’appartenance à `echo_admins` pour la rédaction, la modification et la suppression. Les visiteurs ne voient que les articles dont le statut est `published`.
 
 ## 3. Héberger gratuitement
 Le site doit être servi par une URL HTTPS pour que l’installation PWA fonctionne correctement.
@@ -54,7 +54,7 @@ La PWA peut être installée depuis le navigateur sans passer par Google Play. P
 - `styles.css` : identité graphique responsive
 - `app.js` : actualités, recherche, authentification et rédaction
 - `manifest.webmanifest` et `service-worker.js` : installation et cache PWA
-- `supabase_schema.sql` : table et règles d’accès
+- `supabase_schema.sql` : ancien exemple de schéma autonome, non requis par l’application connectée au projet éditorial
 - `assets/logo-echo-du-nord.png` : logo fourni
 
 Le kit est un point de départ technique, pas encore un service public hébergé ni une application publiée.
