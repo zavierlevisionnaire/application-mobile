@@ -11,7 +11,7 @@
   "theme_color": "#087a37",
   "icons": [
     {
-      "src": "assets/logo-echo-du-nord.png",
+      "src": "logo-echo-du-nord.png",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any"
